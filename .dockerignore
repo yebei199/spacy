@@ -1,0 +1,19 @@
+# 忽略所有日志文件
+.*/
+*.log
+*.xlsx
+*.xls
+*.csv
+*.pdf
+tests/
+
+.editorconfig
+# 忽略临时文件夹
+tmp/
+
+# 忽略版本控制相关的文件
+
+# 忽略一些开发工具生成的临时文件
+.vscode/
+
+.tmp*

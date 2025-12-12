@@ -1,0 +1,9 @@
+[rules]
+index-out-of-bounds = "ignore"
+
+#{
+#  "python": {
+#    "pyrefly":
+#    {"disableLanguageServices":true}
+#  }
+#}

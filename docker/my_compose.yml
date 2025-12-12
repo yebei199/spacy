@@ -1,0 +1,14 @@
+name: pair3
+services:
+  pair3:
+    build:
+      context: .
+      dockerfile: DockerFile1
+      target: development
+#      pull: false
+#    pull_policy: never
+    image: template:0.1.1
+    command: [ "sh","-c","uv run ao.py" ]
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8

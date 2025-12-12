@@ -1,0 +1,14 @@
+project-includes = ["src", "."]
+site_package_path = [".venv/lib/python3.13/site-packages", "."]
+python_interpreter = ".venv/bin/python"
+python_platform = "linux"
+python_version = "3.13"
+
+replace_imports_with_any = ["sympy.*", "*.series"]
+ignore_errors_in_generated_code = true
+ignore_missing_source = true
+
+# disable `bad-assignment` and `invalid-argument` for the whole project
+
+[errors]
+bad-index = false

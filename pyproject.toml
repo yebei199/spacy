@@ -1,0 +1,48 @@
+[project]
+name = "template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "pydantic",
+    "pendulum",
+    "loguru",
+    "tenacity",
+    "attrs"
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "pytest",
+    "pytest-asyncio",
+    "pyrefly",
+]
+
+[tool.uv]
+managed = true
+# 使用阿里云 PyPI 镜像源
+index-url = "https://mirrors.aliyun.com/pypi/simple/"
+# 允许非安全连接到阿里云镜像
+allow-insecure-host = ["mirrors.aliyun.com"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+# Exclude a variety of commonly ignored directories.
+exclude = []
+
+[tool.pytest.ini_options]
+console_output_style = "progress"
+asyncio_default_fixture_loop_scope = "module"
+# 控制颜色输出
+addopts = "--color=yes"
+
+[tool.dagster]
+module_name = "src.my_dg.definitions.server_definitions"
+#code_location_name = "getting_started_etl_tutorial"

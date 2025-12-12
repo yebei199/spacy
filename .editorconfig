@@ -1,0 +1,16 @@
+# 顶层标记，表示是最顶层的配置文件
+root = true
+
+# 匹配所有文件的通用设置
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 80
+
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off

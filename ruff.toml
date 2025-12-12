@@ -1,0 +1,34 @@
+fix = true
+line-length = 80
+indent-width = 4
+extend-include = ["*.ipynb"]
+include = ["*.py", "*.toml"]
+output-format = "grouped"
+
+[lint]
+preview = true
+select = [
+    "E", "W", "N", "PD", "F", "UP", "B", "SIM", "PL", "C90", "I",
+]
+ignore = ["E501", "E203", "E301", "PLR0913", "E722", "PLR2004"]
+
+extend-fixable = ["UP045", "UP034", "UP007"]
+extend-safe-fixes = ["F601", "I001", "PD002", "N804", "N805", "W293", "W291",
+    "E227", "UP045", "UP034", "UP007"]
+
+
+[lint.mccabe]
+max-complexity = 10
+
+
+[format]
+preview = true
+
+skip-magic-trailing-comma = false
+
+exclude = ["*.pyi"]
+docstring-code-format = true
+# 使用单引号
+quote-style = "single"
+line-ending = "lf"
+indent-style = "space"
