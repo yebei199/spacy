@@ -1,8 +1,8 @@
-# py-template
-it is my python template, anyone can use it as a template
+# spacy-viz
+A command-line tool to visualize spaCy's NLP pipeline components and their outputs.
 
 # start
-```bash
 
-uv sync
+```bash
+spacy-viz "Three candidates contested the leadership"
 ```
