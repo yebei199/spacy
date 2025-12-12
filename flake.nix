@@ -37,7 +37,7 @@
             echo "Python: $(python3 --version)"
             echo "UV: $(uv --version)"
             echo "To install/sync dependencies: uv sync"
-            echo "To run the visualizer: uv run spacy-viz 'Your text here'"
+            echo "To run the visualizer: uv run python -m src.scripts.main 'Your text here'"
           '';
         };
 
@@ -45,7 +45,8 @@
           type = "app";
           program = "${pkgs.writeShellScriptBin "spacy-viz" ''
             export LD_LIBRARY_PATH=${lib.makeLibraryPath extraLibs}:$LD_LIBRARY_PATH
-            ${pkgs.uv}/bin/uv run spacy-viz "$@"
+            # 使用 python -m 直接运行模块，避免与脚本名称 'spacy-viz' 发生递归冲突
+            ${pkgs.uv}/bin/uv run python -m src.scripts.main "$@"
           ''}/bin/spacy-viz";
         };
       }
