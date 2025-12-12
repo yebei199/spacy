@@ -27,32 +27,36 @@
           export PATH=${pkgs.uv}/bin:${pkgs.python311}/bin:${pkgs.coreutils}/bin:$PATH
           export LD_LIBRARY_PATH=${lib.makeLibraryPath extraLibs}:$LD_LIBRARY_PATH
           
-          # Create a temporary directory for execution
-          WORK_DIR=$(mktemp -d)
-          # Cleanup on exit
-          trap "rm -rf $WORK_DIR" EXIT
+          # Use a persistent directory to cache the venv and avoid re-installation
+          CACHE_DIR="$HOME/.cache/spacy-viz"
+          mkdir -p "$CACHE_DIR"
           
-          # Copy project files to the temporary directory
-          # We copy from ${self} to ensure we have the source available at runtime
-          cp -r ${self}/src $WORK_DIR/src
-          cp ${self}/pyproject.toml $WORK_DIR/
+          # Update source files
+          # We remove the old src directory to ensure deleted files are removed
+          rm -rf "$CACHE_DIR/src"
+          
+          # Copy project files from the nix store to the cache directory
+          cp -r ${self}/src "$CACHE_DIR/"
+          cp -f ${self}/pyproject.toml "$CACHE_DIR/"
+          
           if [ -f "${self}/README.md" ]; then
-            cp ${self}/README.md $WORK_DIR/
+            cp -f ${self}/README.md "$CACHE_DIR/"
           else
-            touch $WORK_DIR/README.md
+            touch "$CACHE_DIR/README.md"
           fi
+          
           if [ -f "${self}/uv.lock" ]; then
-            cp ${self}/uv.lock $WORK_DIR/
+            cp -f ${self}/uv.lock "$CACHE_DIR/"
           fi
           
-          # Make files writable so uv can update/delete them
-          chmod -R +w $WORK_DIR
+          # Ensure the cache directory and files are writable
+          chmod -R +w "$CACHE_DIR"
           
-          cd $WORK_DIR
+          cd "$CACHE_DIR"
           
-          # Run the visualizer using uv
-          # We assume internet access or cached packages are available for uv
-          uv run python -m src.scripts.main "$@"
+          # Run the visualizer using uv in quiet mode (-q)
+          # This reuses the .venv if it exists and matches the lockfile
+          uv run -q python -m src.scripts.main "$@"
         '';
       in
       {
