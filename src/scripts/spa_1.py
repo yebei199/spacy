@@ -71,6 +71,7 @@ class SpaCy1:
         解析并修改 SVG，为单词 (基于 POS) 和线条 (基于 Dependency) 上色。
         """
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
+        ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
         try:
             root = ET.fromstring(svg_content)
         except ET.ParseError:
