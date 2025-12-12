@@ -153,11 +153,26 @@ class SpaCy1:
         <style>
             body {{
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-                padding: 4rem 2rem;
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 direction: ltr;
             }}
             figure {{
-                margin-bottom: 6rem;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }}
+            svg {{
+                max-width: 100%;
+                max-height: 100%;
             }}
         </style>
     </head>
